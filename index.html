@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parkview Studio</title>
     <style>
-        {
-        -webkit-tap-highlight-color: transparent; 
-    }
         html { scroll-behavior: smooth; }
         body { 
             margin: 0; 
@@ -26,7 +23,6 @@
 
         #check { display: none; }
 
-        
         .checkbtn {
             font-size: 30px;
             color: white;
@@ -65,43 +61,64 @@
 
         nav ul li a:hover { color: #ffcc00; }
 
+       
         .hero {
             background: #ccc url('Images/p8.jpg') no-repeat center center;
             background-size: cover; 
-            height: 350px; 
+            width: 100%;
+            aspect-ratio: 21 / 9; 
+            max-height: 450px;
         }
       
-        .container { max-width: 1000px; margin: auto; padding: 20px; }
+        .container { max-width: 1100px; margin: auto; padding: 20px; }
         .section-title { text-align: center; margin: 30px 0; }
         h2 { border-bottom: 2px solid #444; display: inline-block; padding-bottom: 5px; }
 
         .gallery { 
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 20px;
             justify-content: center;
         }
 
+       
         .gallery img { 
-            width: 30%; 
-            height: 180px;
+            width: calc(33.33% - 20px); 
+            height: 350px; 
             object-fit: cover; 
-            border-radius: 4px; 
+            border-radius: 8px; 
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.03); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            filter: brightness(110%);
         }
 
         .services { 
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 20px;
             justify-content: center;
         }
 
         .card { 
             background: #fff; 
-            padding: 20px; 
-            width: 250px;
+            padding: 30px 20px; 
+            flex: 1; 
             text-align: center; 
             border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
+            transform: translateY(-8px); 
+           
         }
 
         footer { 
@@ -112,11 +129,8 @@
             margin-top: 50px; 
         }
 
-       
-        @media (max-width: 700px) {
+        @media (max-width: 850px) {
             .checkbtn { display: block; }
-
-            
             #check:checked ~ header .checkbtn::after { content: "✕"; }
             #check:not(:checked) ~ header .checkbtn::after { content: "☰"; }
 
@@ -129,24 +143,21 @@
                 padding: 0;
             }
 
-            nav ul li {
-                display: block;
-                border-bottom: 1px solid #555;
-                text-align: center;
-            }
-
-            nav ul li a {
-                display: block;
-                padding: 15px;
-            }
+            nav ul li { display: block; border-bottom: 1px solid #555; }
+            nav ul li a { display: block; padding: 15px; }
+            #check:checked ~ nav ul { max-height: 300px; }
 
            
-            #check:checked ~ nav ul {
-                max-height: 300px; 
-            }
+            .gallery img { width: 100%; height: auto; min-height: 300px; }
 
-            .gallery img { width: 45%; }
-            .hero { height: 200px; }
+            .services { 
+                flex-wrap: wrap; 
+            }
+            .card {
+                flex: 1 1 100%;
+                min-width: 100%;
+            }
+            .hero { aspect-ratio: 16 / 9; }
         }
     </style>
 </head>
@@ -192,22 +203,22 @@
     <div class="services">
         <div class="card">
             <h3>Basic Shoot</h3>
-            <p style="color:#d35400; font-weight:bold;">₹1999</p>
+            <p style="color:#d35400; font-weight:bold; font-size: 1.2rem;">₹1999</p>
         </div>
         <div class="card">
             <h3>Standard Shoot</h3>
-            <p style="color:#d35400; font-weight:bold;">₹3999</p>
+            <p style="color:#d35400; font-weight:bold; font-size: 1.2rem;">₹3999</p>
         </div>
         <div class="card">
             <h3>Premium Shoot</h3>
-            <p style="color:#d35400; font-weight:bold;">₹9999</p>
+            <p style="color:#d35400; font-weight:bold; font-size: 1.2rem;">₹9999</p>
         </div>
     </div>
 
     <div class="section-title">
         <h2 id="about">About Us</h2>
     </div>
-    <p style="text-align: center; max-width: 700px; margin: 0 auto 40px auto;">Parkview Studio offers professional wedding and event shoots at affordable prices.</p>
+    <p style="text-align: center; max-width: 700px; margin: 0 auto 40px auto; line-height: 1.6;">Parkview Studio offers professional wedding and event shoots at affordable prices.</p>
 </div>
 
 <footer>
