@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parkview Studio</title>
     <style>
-       
+        {
+        -webkit-tap-highlight-color: transparent; 
+    }
         html { scroll-behavior: smooth; }
         body { 
             margin: 0; 
@@ -22,7 +24,6 @@
             position: relative; 
         }
 
-       
         #check { display: none; }
 
         
@@ -34,12 +35,11 @@
             position: absolute;
             right: 20px;
             top: 40px;
+            z-index: 1001; 
         }
 
-        
         nav { 
             background: #444; 
-            padding: 15px 0; 
             position: sticky; 
             top: 0; 
             z-index: 1000;
@@ -48,7 +48,7 @@
         nav ul {
             list-style: none;
             margin: 0;
-            padding: 0;
+            padding: 15px 0;
             text-align: center;
         }
 
@@ -63,13 +63,8 @@
             font-weight: bold;
         }
 
-        
-        nav ul li a:hover, 
-        nav ul li a:focus { 
-            color: #ffcc00; 
-        }
+        nav ul li a:hover { color: #ffcc00; }
 
-        
         .hero {
             background: #ccc url('Images/p8.jpg') no-repeat center center;
             background-size: cover; 
@@ -117,29 +112,27 @@
             margin-top: 50px; 
         }
 
-        
+       
         @media (max-width: 700px) {
             .checkbtn { display: block; }
 
             
-            #check:checked ~ header .checkbtn::after {
-                content: "X";
-            }
-            #check:not(:checked) ~ header .checkbtn::after {
-                content: "☰";
-            }
-
-            nav { padding: 0; }
+            #check:checked ~ header .checkbtn::after { content: "✕"; }
+            #check:not(:checked) ~ header .checkbtn::after { content: "☰"; }
 
             nav ul {
-                display: none;
-                width: 100%;
+                display: block; 
+                max-height: 0; 
+                overflow: hidden; 
+                transition: max-height 0.4s ease-in-out; 
                 background: #444;
+                padding: 0;
             }
 
             nav ul li {
                 display: block;
                 border-bottom: 1px solid #555;
+                text-align: center;
             }
 
             nav ul li a {
@@ -147,9 +140,9 @@
                 padding: 15px;
             }
 
-            /* Simple Dropdown Logic */
+           
             #check:checked ~ nav ul {
-                display: block;
+                max-height: 300px; 
             }
 
             .gallery img { width: 45%; }
