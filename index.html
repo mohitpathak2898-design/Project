@@ -11,8 +11,6 @@
             margin: 0; 
             font-family: Arial, sans-serif; 
             background: #f4f4f4; 
-            color: #333;
-            
             -webkit-tap-highlight-color: transparent;
         }
         
@@ -20,28 +18,31 @@
             background: #222; 
             color: #fff; 
             padding: 40px 20px; 
-            text-align: center; 
+            text-align: center;
+            position: relative; 
         }
 
        
-        nav { 
-            background: #444; 
-            padding: 15px 20px; 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000;
-        }
-
-        
         #check { display: none; }
 
-       
+        
         .checkbtn {
-            font-size: 28px;
+            font-size: 30px;
             color: white;
             cursor: pointer;
             display: none; 
-            float: right;
+            position: absolute;
+            right: 20px;
+            top: 40px;
+        }
+
+        
+        nav { 
+            background: #444; 
+            padding: 15px 0; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
         }
 
         nav ul {
@@ -63,6 +64,12 @@
         }
 
         
+        nav ul li a:hover, 
+        nav ul li a:focus { 
+            color: #ffcc00; 
+        }
+
+        
         .hero {
             background: #ccc url('Images/p8.jpg') no-repeat center center;
             background-size: cover; 
@@ -73,7 +80,6 @@
         .section-title { text-align: center; margin: 30px 0; }
         h2 { border-bottom: 2px solid #444; display: inline-block; padding-bottom: 5px; }
 
-        
         .gallery { 
             display: flex;
             flex-wrap: wrap;
@@ -83,12 +89,11 @@
 
         .gallery img { 
             width: 30%; 
-            height: 200px;
+            height: 180px;
             object-fit: cover; 
             border-radius: 4px; 
         }
 
-        
         .services { 
             display: flex;
             flex-wrap: wrap;
@@ -99,12 +104,10 @@
         .card { 
             background: #fff; 
             padding: 20px; 
-            width: 280px;
+            width: 250px;
             text-align: center; 
             border: 1px solid #ddd;
         }
-
-        .price { font-size: 20px; font-weight: bold; color: #d35400; }
 
         footer { 
             background: #222; 
@@ -116,21 +119,26 @@
 
         
         @media (max-width: 700px) {
-            .checkbtn { display: block; } 
+            .checkbtn { display: block; }
+
+            
+            #check:checked ~ header .checkbtn::after {
+                content: "X";
+            }
+            #check:not(:checked) ~ header .checkbtn::after {
+                content: "☰";
+            }
+
+            nav { padding: 0; }
 
             nav ul {
-                display: none; 
+                display: none;
                 width: 100%;
                 background: #444;
-                position: absolute;
-                top: 55px;
-                left: 0;
-                border-top: 1px solid #555;
             }
 
             nav ul li {
                 display: block;
-                margin: 0;
                 border-bottom: 1px solid #555;
             }
 
@@ -139,12 +147,11 @@
                 padding: 15px;
             }
 
-           
-            #check:checked ~ ul {
+            /* Simple Dropdown Logic */
+            #check:checked ~ nav ul {
                 display: block;
             }
 
-            
             .gallery img { width: 45%; }
             .hero { height: 200px; }
         }
@@ -152,15 +159,15 @@
 </head>
 <body>
 
+<input type="checkbox" id="check">
+
 <header id="home-top">
     <h1>Parkview Studio</h1>
     <p>Capturing Moments Beautifully</p>
+    <label for="check" class="checkbtn"></label>
 </header>
 
 <nav>
-    <input type="checkbox" id="check">
-    <label for="check" class="checkbtn">☰</label>
-    
     <ul>
         <li><a href="#home-top">Home</a></li>
         <li><a href="#gallery">Gallery</a></li>
@@ -172,18 +179,17 @@
 <div class="hero"></div>
 
 <div class="container">
-
     <div class="section-title">
         <h2 id="gallery">Our Work</h2>
     </div>
     
     <div class="gallery">
-        <img src="Images/p1.jpg" alt="Work 1">
-        <img src="Images/p3.jpg" alt="Work 2">
-        <img src="Images/p4.jpg" alt="Work 3">
-        <img src="Images/p5.jpg" alt="Work 4">
-        <img src="Images/p6.jpg" alt="Work 5">
-        <img src="Images/p7.jpg" alt="Work 6">
+        <img src="Images/p1.jpg" alt="1">
+        <img src="Images/p3.jpg" alt="2">
+        <img src="Images/p4.jpg" alt="3">
+        <img src="Images/p5.jpg" alt="4">
+        <img src="Images/p6.jpg" alt="5">
+        <img src="Images/p7.jpg" alt="6">
     </div>
 
     <div class="section-title">
@@ -193,30 +199,22 @@
     <div class="services">
         <div class="card">
             <h3>Basic Shoot</h3>
-            <p>1.5 Hour Session</p>
-            <p class="price">₹1999</p>
+            <p style="color:#d35400; font-weight:bold;">₹1999</p>
         </div>
-
         <div class="card">
             <h3>Standard Shoot</h3>
-            <p>3 Hour Session + Editing</p>
-            <p class="price">₹3999</p>
+            <p style="color:#d35400; font-weight:bold;">₹3999</p>
         </div>
-
         <div class="card">
             <h3>Premium Shoot</h3>
-            <p>Full Day + Album</p>
-            <p class="price">₹9999</p>
+            <p style="color:#d35400; font-weight:bold;">₹9999</p>
         </div>
     </div>
 
     <div class="section-title">
         <h2 id="about">About Us</h2>
     </div>
-    <div style="text-align: center; max-width: 800px; margin: 0 auto 40px auto;">
-        <p>Parkview Studio is a photography studio offering portrait, wedding, and event shoots. We provide high-quality images and professional editing at affordable prices.</p>
-    </div>
-
+    <p style="text-align: center; max-width: 700px; margin: 0 auto 40px auto;">Parkview Studio offers professional wedding and event shoots at affordable prices.</p>
 </div>
 
 <footer>
