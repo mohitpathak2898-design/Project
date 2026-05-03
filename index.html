@@ -1,157 +1,146 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parkview Studio</title>
     <style>
+        html { scroll-behavior: smooth; }
+        body { margin:0; font-family: 'Segoe UI', Arial, sans-serif; background:#f4f4f4; line-height: 1.6; }
         
-        html {
-            scroll-behavior: smooth;
+        header { background:#222; color:#fff; padding:30px 20px; text-align:center; }
+        header h1 { margin: 0; font-size: 2.5rem; }
+        
+      
+        nav { 
+            background:#444; 
+            padding:15px; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            text-align: center;
         }
 
-        body {
-            margin:0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background:#f4f4f4; line-height: 1.6; 
-        }
-        
-        header {
-        background:#222; color:#fff; padding:30px 20px; text-align:center; 
-        }
-        header h1 {
-            margin: 0; font-size: 2.5rem;
-        }
-        
-        nav {
-        background:#444; 
-        text-align:center; 
-        padding:15px; 
-        position: sticky;
-        top: 0; 
-        z-index: 1000;
-        }
-        nav a {
-        color:#fff;
-        margin:0 15px; 
-        text-decoration:none; 
-        font-weight:bold; 
-        transition: 0.3s; }
-        nav a:hover {
-        color: #ffcc00;
+        #check { display: none; }
+
+        .checkbtn {
+            font-size: 30px;
+            color: white;
+            float: right;
+            line-height: 30px;
+            margin-right: 20px;
+            cursor: pointer;
+            display: none; 
         }
 
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        nav ul li a:hover { color: #ffcc00; }
+
+      
         .hero {
             background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url('Images/p8.jpg') no-repeat center center;
             background-size: cover; 
-            height: 450px; 
-            color: #222; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center; 
-            align-items: center;        
-            text-align: center;
-            padding: 20px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem); 
-            margin-bottom: 10px;
-            font-weight: 900;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            font-weight: bold;
-            background: rgba(255,255,255,0.5);
-            padding: 5px 15px;
-            border-radius: 5px;
+            height: 400px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
         }
       
-        .container { max-width:1200px; margin:auto; padding:20px; }
+        .container { max-width:1100px; margin:auto; padding:20px; }
 
-       
-        h2 { 
-            margin-top:40px; 
-            text-align: center; 
-            font-size: 2rem; 
-            border-bottom: 2px solid #222; 
-            display: inline-block; 
-            padding-bottom: 5px;
-            scroll-margin-top: 80px; 
+        .section-title-wrapper { text-align: center; margin-top: 40px; }
+        h2 { border-bottom: 2px solid #222; display: inline-block; padding-bottom: 5px; }
+
+      
+        .gallery { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 15px; 
+            margin-top: 20px; 
         }
 
-        .section-title-wrapper { text-align: center; }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .gallery img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: all 0.4s ease; 
+        .gallery img { 
+            width: 100%; 
+            aspect-ratio: 1/1; 
+            object-fit: cover; 
+            border-radius: 5px; 
+            transition: transform 0.3s ease, filter 0.3s ease;
             cursor: pointer;
         }
 
+     
         .gallery img:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transform: scale(1.05);
             filter: brightness(1.1);
         }
 
-        .services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
+       
+        .services { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 20px; 
+            margin-top: 20px; 
         }
 
-        .card {
-            background:#fff; padding:25px; border-radius:12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            text-align:center;
-            transition: 0.3s;
-        }
-        
-        .card:hover { transform: translateY(-5px); }
-        
-        .price { font-size:24px; font-weight: bold; margin:15px 0; color:#e67e22; }
-
-        .btn {
-            display: inline-block; 
-            padding: 10px 20px; 
-            background: #222; 
-            color: #fff; 
-            text-decoration: none; 
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer; 
-            transition: all 0.3s ease; 
+        .card { 
+            background:#fff; 
+            padding:20px; 
+            border-radius:10px; 
+            text-align:center; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
         }
 
-        .btn:hover {
-            background: #003366;
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+        .price { font-size:22px; font-weight: bold; color:#e67e22; }
+
+        footer { 
+            background:#222; 
+            color:#fff; 
+            text-align:center; 
+            padding:20px; 
+            margin-top:40px; 
         }
 
-        footer {
-            background:#222; color:#fff; text-align:center;
-            padding:30px 20px; margin-top:50px;
-        }
+        @media (max-width: 700px) {
+            .checkbtn { display: block; }
 
-        @media (max-width: 600px) {
-            nav a { margin: 0 8px; font-size: 14px; }
-            .hero { height: 300px; }
-            .container { padding: 15px; }
+            nav ul {
+                position: fixed;
+                width: 100%;
+                height: 100vh;
+                background: #444;
+                top: 60px;
+                left: -100%; 
+                text-align: center;
+                transition: all .5s;
+            }
+
+            nav ul li {
+                display: block;
+                margin: 40px 0;
+                line-height: 30px;
+            }
+
+            #check:checked ~ ul { left: 0; }
+            
             .gallery { grid-template-columns: 1fr; }
+            .hero { height: 250px; }
         }
     </style>
 </head>
@@ -163,15 +152,18 @@
 </header>
 
 <nav>
-    <a href="#home-top">Home</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#services">Packages</a>
-    <a href="#about">About Us</a>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">☰</label>
+    
+    <ul>
+        <li><a href="#home-top">Home</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#services">Packages</a></li>
+        <li><a href="#about">About Us</a></li>
+    </ul>
 </nav>
 
-<div class="hero">
-    
-</div>
+<div class="hero"></div>
 
 <div class="container">
 
@@ -197,21 +189,18 @@
             <h3>Basic Shoot</h3>
             <p>1.5 Hour Session</p>
             <p class="price">₹1999</p>
-            <span class="btn">Limited Offer</span>
         </div>
 
         <div class="card">
             <h3>Standard Shoot</h3>
             <p>3 Hour Session + Editing</p>
             <p class="price">₹3999</p>
-            <span class="btn">Best Seller</span>
         </div>
 
         <div class="card">
             <h3>Premium Shoot</h3>
             <p>Full Day + Album</p>
             <p class="price">₹9999</p>
-            <span class="btn">Most Popular</span>
         </div>
     </div>
 
