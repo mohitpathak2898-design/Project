@@ -61,7 +61,6 @@
 
         nav ul li a:hover { color: #ffcc00; }
 
-       
         .hero {
             background: #ccc url('Images/p8.jpg') no-repeat center center;
             background-size: cover; 
@@ -74,32 +73,33 @@
         .section-title { text-align: center; margin: 30px 0; }
         h2 { border-bottom: 2px solid #444; display: inline-block; padding-bottom: 5px; }
 
+        
         .gallery { 
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             justify-content: center;
         }
 
-       
         .gallery img { 
-            width: calc(33.33% - 20px); 
-            height: 350px; 
+            width: 100%; 
+            aspect-ratio: 1 / 1; 
             object-fit: cover; 
             border-radius: 8px; 
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
             cursor: pointer;
         }
 
+        
         .gallery img:hover {
             transform: scale(1.03); 
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            filter: brightness(110%);
+            filter: brightness(115%);
         }
 
         .services { 
             display: flex;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             gap: 20px;
             justify-content: center;
         }
@@ -108,6 +108,7 @@
             background: #fff; 
             padding: 30px 20px; 
             flex: 1; 
+            min-width: 250px;
             text-align: center; 
             border: 1px solid #ddd;
             border-radius: 8px;
@@ -115,10 +116,10 @@
             cursor: pointer;
         }
 
+        
         .card:hover {
             box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
-            transform: translateY(-8px); 
-           
+            transform: translateY(-10px); 
         }
 
         footer { 
@@ -129,6 +130,16 @@
             margin-top: 50px; 
         }
 
+       
+        .about-content {
+            text-align: center;
+            max-width: 700px; 
+            margin: 0 auto 40px auto;
+            line-height: 1.6;
+            padding: 0 10px;
+        }
+
+        
         @media (max-width: 850px) {
             .checkbtn { display: block; }
             #check:checked ~ header .checkbtn::after { content: "✕"; }
@@ -148,15 +159,20 @@
             #check:checked ~ nav ul { max-height: 300px; }
 
            
-            .gallery img { width: 100%; height: auto; min-height: 300px; }
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
 
-            .services { 
-                flex-wrap: wrap; 
+            .services {
+                padding: 0 10px;
             }
+
             .card {
-                flex: 1 1 100%;
-                min-width: 100%;
+                flex: 0 0 100%; 
+                margin-bottom: 10px;
             }
+
             .hero { aspect-ratio: 16 / 9; }
         }
     </style>
@@ -218,7 +234,10 @@
     <div class="section-title">
         <h2 id="about">About Us</h2>
     </div>
-    <p style="text-align: center; max-width: 700px; margin: 0 auto 40px auto; line-height: 1.6;">Parkview Studio offers professional wedding and event shoots at affordable prices.</p>
+    
+    <div class="about-content">
+        <p>Parkview Studio offers professional wedding and event shoots at affordable prices. We believe every picture tells a story, and at Parkview Studio, we make those stories unforgettable.</p>
+    </div>
 </div>
 
 <footer>
