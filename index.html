@@ -4,80 +4,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parkview Studio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
+        
         html { scroll-behavior: smooth; }
         body { 
             margin: 0; 
-            font-family: Arial, sans-serif; 
-            background: #f4f4f4; 
+            font-family: 'Poppins', sans-serif; 
+            background: #fafafa; 
+            color: #333;
             -webkit-tap-highlight-color: transparent;
         }
         
-        header { 
-            background: #222; 
-            color: #fff; 
-            padding: 40px 20px; 
-            text-align: center;
-            position: relative; 
-        }
-
-        #check { display: none; }
-
-        .checkbtn {
-            font-size: 30px;
-            color: white;
-            cursor: pointer;
-            display: none; 
-            position: absolute;
-            right: 20px;
-            top: 40px;
-            z-index: 1001; 
-        }
-
+        
         nav { 
-            background: #444; 
-            position: sticky; 
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed; 
             top: 0; 
+            left: 0;
+            width: 100%;
             z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
 
         nav ul {
             list-style: none;
             margin: 0;
-            padding: 15px 0;
-            text-align: center;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
         }
 
-        nav ul li {
-            display: inline-block;
-            margin: 0 15px;
-        }
+        nav ul li { margin: 0 20px; }
 
         nav ul li a {
-            color: white;
+            color: #222;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
         }
 
-        nav ul li a:hover { color: #ffcc00; }
-
-        .hero {
-            background: #ccc url('Images/p8.jpg') no-repeat center center;
-            background-size: cover; 
-            width: 100%;
-            aspect-ratio: 21 / 9; 
-            max-height: 450px;
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #d35400;
+            transition: width 0.3s ease;
         }
-      
-        .container { max-width: 1100px; margin: auto; padding: 20px; }
-        .section-title { text-align: center; margin: 30px 0; }
-        h2 { border-bottom: 2px solid #444; display: inline-block; padding-bottom: 5px; }
+
+        nav ul li a:hover { color: #d35400; }
+        nav ul li a:hover::after { width: 100%; }
+
+        #check { display: none; }
+
+        
+        .checkbtn {
+            font-size: 30px;
+            color: #222;
+            cursor: pointer;
+            display: none; 
+            position: fixed; 
+            right: 25px;
+            top: 15px;
+            z-index: 1001; 
+        }
+
+        
+        header {
+            position: relative;
+            height: 100vh;
+            min-height: 500px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('Images/p8.jpg') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            margin: 0;
+            letter-spacing: 2px;
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.5);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-top: 10px;
+            letter-spacing: 3px;
+            color: #e0e0e0;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        
+        .container { 
+            max-width: 1200px; 
+            margin: auto; 
+            padding: 60px 20px 30px; 
+        }
+        
+        .section-title { text-align: center; margin-bottom: 50px; }
+        
+        
+        .packages-title {
+            margin-top: 80px; 
+        }
+
+        .section-title h2 { 
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #222;
+            margin: 0;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title h2::after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background: #d35400;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
         
         .gallery { 
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
             justify-content: center;
         }
 
@@ -85,107 +172,114 @@
             width: 100%; 
             aspect-ratio: 1 / 1; 
             object-fit: cover; 
-            border-radius: 8px; 
-            transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+            border-radius: 12px; 
+            transition: all 0.4s ease;
             cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .gallery img:hover {
+            transform: translateY(-10px) scale(1.02); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            filter: brightness(110%);
         }
 
         
-        .gallery img:hover {
-            transform: scale(1.03); 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            filter: brightness(115%);
-        }
-
         .services { 
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 30px;
             justify-content: center;
         }
 
         .card { 
             background: #fff; 
-            padding: 30px 20px; 
+            padding: 40px 30px; 
             flex: 1; 
-            min-width: 250px;
+            min-width: 280px;
             text-align: center; 
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #f0f0f0;
         }
-
         
         .card:hover {
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12); 
             transform: translateY(-10px); 
         }
 
-        footer { 
-            background: #222; 
-            color: #fff; 
-            text-align: center; 
-            padding: 20px; 
-            margin-top: 50px; 
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #222;
         }
 
-       
-        .about-content {
-            text-align: center;
-            max-width: 700px; 
-            margin: 0 auto 40px auto;
-            line-height: 1.6;
-            padding: 0 10px;
+        .card p {
+            color: #d35400; 
+            font-weight: 700; 
+            font-size: 1.8rem;
+            margin: 0;
         }
 
         
+        footer { 
+            background: #1a1a1a; 
+            color: #fff; 
+            text-align: center; 
+            padding: 30px 20px; 
+            margin-top: 0; 
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+       
+        
         @media (max-width: 850px) {
             .checkbtn { display: block; }
-            #check:checked ~ header .checkbtn::after { content: "✕"; }
-            #check:not(:checked) ~ header .checkbtn::after { content: "☰"; }
+            #check:checked ~ .checkbtn::after { content: "✕"; }
+            #check:not(:checked) ~ .checkbtn::after { content: "☰"; }
 
+            nav { background: #fff; }
+            
             nav ul {
-                display: block; 
+                display: flex; 
+                flex-direction: column;
+                justify-content: flex-start;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                height: 100vh;
                 max-height: 0; 
                 overflow: hidden; 
                 transition: max-height 0.4s ease-in-out; 
-                background: #444;
+                background: #fff;
                 padding: 0;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
             }
 
-            nav ul li { display: block; border-bottom: 1px solid #555; }
-            nav ul li a { display: block; padding: 15px; }
-            #check:checked ~ nav ul { max-height: 300px; }
+            nav ul li { display: block; width: 100%; text-align: center; margin: 0; }
+            nav ul li a { display: block; padding: 20px; border-bottom: 1px solid #f0f0f0; color: #222; }
+            #check:checked ~ nav ul { max-height: 100vh; padding-top: 20px; }
 
+            header h1 { font-size: 3rem; }
+            header p { font-size: 1.1rem; }
            
-            .gallery {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .services {
-                padding: 0 10px;
-            }
-
-            .card {
-                flex: 0 0 100%; 
-                margin-bottom: 10px;
-            }
-
-            .hero { aspect-ratio: 16 / 9; }
+            .gallery { gap: 15px; }
+            .container { padding: 40px 15px 20px; }
+            .card { flex: 0 0 100%; }
+            .packages-title { margin-top: 50px; }
         }
     </style>
 </head>
 <body>
 
 <input type="checkbox" id="check">
-
-<header id="home-top">
-    <h1>Parkview Studio</h1>
-    <p>Capturing Moments Beautifully</p>
-    <label for="check" class="checkbtn"></label>
-</header>
+<label for="check" class="checkbtn"></label>
 
 <nav>
     <ul>
@@ -196,7 +290,10 @@
     </ul>
 </nav>
 
-<div class="hero"></div>
+<header id="home-top">
+    <h1>Parkview Studio</h1>
+    <p>Capturing Moments Beautifully</p>
+</header>
 
 <div class="container">
     <div class="section-title">
@@ -204,44 +301,36 @@
     </div>
     
     <div class="gallery">
-        <img src="Images/p1.jpg" alt="1">
-        <img src="Images/p3.jpg" alt="2">
-        <img src="Images/p4.jpg" alt="3">
-        <img src="Images/p5.jpg" alt="4">
-        <img src="Images/p6.jpg" alt="5">
-        <img src="Images/p7.jpg" alt="6">
+        <img src="Images/p1.jpg" alt="1" loading="lazy" decoding="async">
+        <img src="Images/p3.jpg" alt="2" loading="lazy" decoding="async">
+        <img src="Images/p4.jpg" alt="3" loading="lazy" decoding="async">
+        <img src="Images/p5.jpg" alt="4" loading="lazy" decoding="async">
+        <img src="Images/p6.jpg" alt="5" loading="lazy" decoding="async">
+        <img src="Images/p7.jpg" alt="6" loading="lazy" decoding="async">
     </div>
 
-    <div class="section-title">
+    <div class="section-title packages-title">
         <h2 id="services">Photography Packages</h2>
     </div>
 
     <div class="services">
         <div class="card">
             <h3>Basic Shoot</h3>
-            <p style="color:#d35400; font-weight:bold; font-size: 1.2rem;">₹1999</p>
+            <p>₹1999</p>
         </div>
         <div class="card">
             <h3>Standard Shoot</h3>
-            <p style="color:#d35400; font-weight:bold; font-size: 1.2rem;">₹3999</p>
+            <p>₹3999</p>
         </div>
         <div class="card">
             <h3>Premium Shoot</h3>
-            <p style="color:#d35400; font-weight:bold; font-size: 1.2rem;">₹9999</p>
+            <p>₹9999</p>
         </div>
-    </div>
-
-    <div class="section-title">
-        <h2 id="about">About Us</h2>
-    </div>
-    
-    <div class="about-content">
-        <p>Parkview Studio offers professional wedding and event shoots at affordable prices. We believe every picture tells a story, and at Parkview Studio, we make those stories unforgettable.</p>
     </div>
 </div>
 
-<footer>
-    <p>© 2026 Parkview Studio</p>
+<footer id="about">
+    <p>© 2026 Parkview Studio | All Rights Reserved</p>
 </footer>
 
 </body>
