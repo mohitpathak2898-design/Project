@@ -6,9 +6,10 @@
     <title>Parkview Studio</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="preload" as="image" href="Images/p8.jpg">
 
     <style>
-        
         html { scroll-behavior: smooth; }
         body { 
             margin: 0; 
@@ -18,9 +19,8 @@
             -webkit-tap-highlight-color: transparent;
         }
         
-        
         nav { 
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             position: fixed; 
             top: 0; 
@@ -53,7 +53,6 @@
             position: relative;
         }
 
-        
         nav ul li a::after {
             content: '';
             position: absolute;
@@ -72,7 +71,7 @@
 
         
         .checkbtn {
-            font-size: 30px;
+            font-size: 32px;
             color: #222;
             cursor: pointer;
             display: none; 
@@ -80,9 +79,11 @@
             right: 25px;
             top: 15px;
             z-index: 1001; 
+            line-height: 1;
         }
+        .checkbtn::after { content: "\2630"; font-family: sans-serif; } 
+        #check:checked ~ .checkbtn::after { content: "\2715"; } 
 
-        
         header {
             position: relative;
             height: 100vh;
@@ -116,7 +117,6 @@
             color: #e0e0e0;
             animation: fadeInUp 1s ease-out 0.5s both;
         }
-
         
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
@@ -128,6 +128,11 @@
         }
 
         
+        @keyframes imageFade {
+            from { opacity: 0; filter: blur(5px); }
+            to { opacity: 1; filter: blur(0); }
+        }
+
         .container { 
             max-width: 1200px; 
             margin: auto; 
@@ -136,10 +141,7 @@
         
         .section-title { text-align: center; margin-bottom: 50px; }
         
-        
-        .packages-title {
-            margin-top: 80px; 
-        }
+        .packages-title { margin-top: 80px; }
 
         .section-title h2 { 
             font-family: 'Playfair Display', serif;
@@ -160,7 +162,6 @@
             transform: translateX(-50%);
         }
 
-        
         .gallery { 
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -173,9 +174,11 @@
             aspect-ratio: 1 / 1; 
             object-fit: cover; 
             border-radius: 12px; 
+            background-color: #eee; 
             transition: all 0.4s ease;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            animation: imageFade 0.8s ease-in-out forwards;
         }
         
         .gallery img:hover {
@@ -184,7 +187,6 @@
             filter: brightness(110%);
         }
 
-        
         .services { 
             display: flex;
             flex-wrap: wrap;
@@ -226,7 +228,6 @@
             margin: 0;
         }
 
-        
         footer { 
             background: #1a1a1a; 
             color: #fff; 
@@ -240,9 +241,7 @@
         
         @media (max-width: 850px) {
             .checkbtn { display: block; }
-            #check:checked ~ .checkbtn::after { content: "✕"; }
-            #check:not(:checked) ~ .checkbtn::after { content: "☰"; }
-
+            
             nav { background: #fff; }
             
             nav ul {
@@ -266,13 +265,26 @@
             nav ul li a { display: block; padding: 20px; border-bottom: 1px solid #f0f0f0; color: #222; }
             #check:checked ~ nav ul { max-height: 100vh; padding-top: 20px; }
 
-            header h1 { font-size: 3rem; }
-            header p { font-size: 1.1rem; }
+            
+            header { 
+                background-attachment: scroll; 
+                background-position: center center;
+                height: 60vh;
+                min-height: 400px;
+            }
+
+            header h1 { font-size: 2.8rem; }
+            header p { font-size: 1rem; }
            
-            .gallery { gap: 15px; }
-            .container { padding: 40px 15px 20px; }
-            .card { flex: 0 0 100%; }
-            .packages-title { margin-top: 50px; }
+            
+            .gallery { 
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+                gap: 12px; 
+            }
+            .container { padding: 30px 15px 20px; } 
+            
+            .card { flex: 0 0 100%; min-width: unset; }
+            .packages-title { margin-top: 40px; }
         }
     </style>
 </head>
@@ -301,12 +313,12 @@
     </div>
     
     <div class="gallery">
-        <img src="Images/p1.jpg" alt="1" loading="lazy" decoding="async">
-        <img src="Images/p3.jpg" alt="2" loading="lazy" decoding="async">
-        <img src="Images/p4.jpg" alt="3" loading="lazy" decoding="async">
-        <img src="Images/p5.jpg" alt="4" loading="lazy" decoding="async">
-        <img src="Images/p6.jpg" alt="5" loading="lazy" decoding="async">
-        <img src="Images/p7.jpg" alt="6" loading="lazy" decoding="async">
+        <img src="Images/p1.jpg" alt="1" loading="lazy">
+        <img src="Images/p3.jpg" alt="2" loading="lazy">
+        <img src="Images/p4.jpg" alt="3" loading="lazy">
+        <img src="Images/p5.jpg" alt="4" loading="lazy">
+        <img src="Images/p6.jpg" alt="5" loading="lazy">
+        <img src="Images/p7.jpg" alt="6" loading="lazy">
     </div>
 
     <div class="section-title packages-title">
