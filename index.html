@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parkview Studio | Capture Your Moments</title>
     <style>
-        
         * { 
             margin: 0; 
             padding: 0; 
             box-sizing: border-box; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            }
+        }
 
         body { 
-               background-color: #f4f4f4; 
-               color: #333; 
-              }
+            background-color: #f4f4f4; 
+            color: #333; 
+        }
 
         
         .navbar {
@@ -25,98 +24,197 @@
             align-items: center;
             padding: 20px 5%;
             background: white;
-            color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
         .logo { 
-         font-size: 1.5rem; 
-         font-weight: bold; 
-         letter-spacing: 2px; 
-         color: #f39c12; 
-           }
+            font-size: 1.5rem; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            color: #f39c12; 
+        }
         
         .nav-links { 
-         display: flex; 
-         list-style: none; 
-          }
+            display: flex; 
+            list-style: none; 
+        }
 
         .nav-links li { 
-         margin-left: 20px; 
-         }
+            margin-left: 20px; 
+        }
 
         .nav-links a { 
-         color: black; 
-         text-decoration: none; 
-         font-size: 1rem; 
-         transition: 0.3s; 
-          }
+            color: #333; 
+            text-decoration: none; 
+            font-size: 1rem; 
+            transition: color 0.3s ease; 
+            font-weight: 500;
+        }
 
         .nav-links a:hover { 
-         color: #f39c12; 
-           }
+            color: #f39c12; 
+        }
 
         
         #menu-toggle { 
-        display: none; 
-          }
+            display: none; 
+        }
 
         .hamburger { 
-         display: none; 
-         cursor: pointer; 
-         font-size: 25px; 
-          }
+            display: none; 
+            cursor: pointer; 
+            font-size: 28px; 
+            color: #333; 
+            user-select: none;
+        }
 
         
         .hero {
             height: 90vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-                       1.2.1&auto=format&fit=crop&w=1600&q=80') center/cover;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80') center/cover;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: white;
+            padding: 0 20px;
         }
+
         .hero-content h1 { 
-         font-size: 3.5rem; 
-         margin-bottom: 15px; 
-          }
+            font-size: clamp(2.5rem, 5vw, 4rem); 
+            margin-bottom: 15px; 
+        }
 
         .hero-content p { 
-         font-size: 1.2rem; 
-         margin-bottom: 25px; 
-          }
+            font-size: clamp(1rem, 2vw, 1.2rem); 
+            margin-bottom: 25px; 
+        }
 
         .btn { 
-         padding: 12px 30px; 
-         background: #f39c12; 
-         color: #fff; 
-         text-decoration: none; 
-         border-radius: 5px; 
-         font-weight: bold; 
-         }
+            padding: 12px 30px; 
+            background: #f39c12; 
+            color: #fff; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            font-weight: bold; 
+            transition: background 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #d68910;
+        }
+
+        
+        .info-section {
+            background-color: #ffffff;
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .info-section h2 {
+            font-size: 2.5rem;
+            color: #222;
+            margin-bottom: 50px;
+        }
+
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .card {
+            background: #fdfdfd;
+            border: 1px solid #eaeaea;
+            padding: 40px 20px;
+            border-radius: 8px;
+            flex: 1 1 300px;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: #f39c12;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        
+        .footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 0.9rem;
+        }
+
+        .footer span {
+            color: #f39c12;
+            font-weight: bold;
+        }
 
         
         @media (max-width: 768px) {
-            .hamburger { display: block; }
+            .hamburger { 
+                display: block; 
+            }
+            
             .nav-links {
                 position: absolute;
                 top: 70px;
                 left: -100%;
                 flex-direction: column;
-                background: #000;
+                background: rgba(17, 17, 17, 0.98); 
                 width: 100%;
-                height: 90vh;
+                height: calc(100vh - 70px);
                 text-align: center;
-                transition: 0.5s;
+                transition: left 0.4s ease-in-out;
                 padding-top: 50px;
             }
-            .nav-links li { margin: 20px 0; }
+
+            .nav-links li { 
+                margin: 25px 0; 
+            }
+
+            .nav-links a {
+                color: white;
+                font-size: 1.2rem;
+            }
+
+            .nav-links a:hover {
+                color: #f39c12;
+            }
             
             
-            #menu-toggle:checked ~ .nav-links { left: 0; }
+            #menu-toggle:checked ~ .nav-links { 
+                left: 0; 
+            }
+
+            .info-section {
+                padding: 50px 5%;
+            }
+            
+            .info-section h2 {
+                font-size: 2rem;
+                margin-bottom: 30px;
+            }
         }
     </style>
 </head>
@@ -124,7 +222,6 @@
 
     <nav class="navbar">
         <div class="logo">PARKVIEW STUDIO</div>
-        
         
         <input type="checkbox" id="menu-toggle">
         <label for="menu-toggle" class="hamburger">&#9776;</label>
@@ -145,6 +242,28 @@
             <a href="#" class="btn">View Gallery</a>
         </div>
     </section>
+
+    <section class="info-section">
+        <h2>What We Offer</h2>
+        <div class="cards-container">
+            <div class="card">
+                <h3>Wedding Packages</h3>
+                <p>A perfect wedding shoot that will capture your most beautiful moments for a lifetime. Complete coverage from pre-wedding to the reception.</p>
+            </div>
+            <div class="card">
+                <h3>Destination Shoots</h3>
+                <p>Have your photoshoot at your preferred location. Our experts will capture cinematic and natural photos that you will cherish forever.</p>
+            </div>
+            <div class="card">
+                <h3>Portrait & Modeling</h3>
+                <p>Professional and aesthetic portrait sessions that highlight your personality. Best for personal portfolios and fashion photography.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 <span>Parkview Studio</span>. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>
