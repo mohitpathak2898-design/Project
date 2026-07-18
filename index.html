@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parkview Studio | Capture Your Moments</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { 
             margin: 0; 
             padding: 0; 
             box-sizing: border-box; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            font-family: 'Poppins', sans-serif; 
+        }
+
+        html {
+            scroll-behavior: smooth; 
         }
 
         body { 
-            background-color: #f4f4f4; 
+            background-color: #f8f9fa; 
             color: #333; 
         }
 
@@ -22,18 +28,33 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            background: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
+            padding: 20px 8%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
             top: 0;
             z-index: 1000;
+            transition: padding 0.3s ease, background 0.3s ease;
+        }
+
+        
+        .navbar.scrolled {
+            padding: 15px 8%;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
         .logo { 
-            font-size: 1.5rem; 
-            font-weight: bold; 
-            letter-spacing: 2px; 
+            font-size: 1.6rem; 
+            font-weight: 700; 
+            letter-spacing: 1px; 
+            color: #222; 
+        }
+
+        .logo span {
             color: #f39c12; 
         }
         
@@ -43,38 +64,54 @@
         }
 
         .nav-links li { 
-            margin-left: 20px; 
+            margin-left: 30px; 
         }
 
         .nav-links a { 
-            color: #333; 
+            color: #444; 
             text-decoration: none; 
             font-size: 1rem; 
-            transition: color 0.3s ease; 
             font-weight: 500;
+            transition: color 0.3s ease; 
+            position: relative;
+        }
+
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #f39c12;
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover { 
             color: #f39c12; 
         }
 
-        
-        #menu-toggle { 
-            display: none; 
+        .nav-links a:hover::after {
+            width: 100%;
         }
+
+        #menu-toggle { 
+          display: none; 
+            }
 
         .hamburger { 
             display: none; 
             cursor: pointer; 
             font-size: 28px; 
             color: #333; 
-            user-select: none;
-        }
-
+              }
+        
         
         .hero {
-            height: 90vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80') center/cover;
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-                              1.2.1&auto=format&fit=crop&w=1600&q=80') center/cover;
+            background-attachment: fixed; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -84,144 +121,160 @@
         }
 
         .hero-content h1 { 
-            font-size: clamp(2.5rem, 5vw, 4rem); 
-            margin-bottom: 15px; 
+            font-size: clamp(3rem, 6vw, 4.5rem); 
+            font-weight: 700;
+            margin-bottom: 20px; 
+            animation: fadeInDown 1s ease;
         }
 
         .hero-content p { 
-            font-size: clamp(1rem, 2vw, 1.2rem); 
-            margin-bottom: 25px; 
+            font-size: clamp(1.1rem, 2vw, 1.3rem); 
+            font-weight: 300;
+            margin-bottom: 35px; 
+            color: #ddd;
+            animation: fadeInUp 1s ease 0.3s backwards;
         }
 
         .btn { 
-            padding: 12px 30px; 
+            padding: 14px 35px; 
             background: #f39c12; 
             color: #fff; 
             text-decoration: none; 
-            border-radius: 5px; 
-            font-weight: bold; 
-            transition: background 0.3s ease;
+            border-radius: 30px; 
+            font-weight: 600; 
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
             display: inline-block;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4);
+            animation: fadeInUp 1s ease 0.6s backwards;
         }
 
         .btn:hover {
-            background: #d68910;
+            background: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(243, 156, 18, 0.6);
         }
 
-        
         .info-section {
-            background-color: #ffffff;
-            padding: 80px 5%;
+            padding: 100px 8%;
             text-align: center;
         }
 
         .info-section h2 {
             font-size: 2.5rem;
             color: #222;
-            margin-bottom: 50px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            color: #777;
+            margin-bottom: 60px;
+            font-size: 1.1rem;
         }
 
         .cards-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
-        }
-
-        .card {
-            background: #fdfdfd;
-            border: 1px solid #eaeaea;
-            padding: 40px 20px;
-            border-radius: 8px;
-            flex: 1 1 300px;
-            max-width: 400px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            gap: 40px;
         }
 
         
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        .card {
+            background: #fff;
+            padding: 50px 30px;
+            border-radius: 16px;
+            flex: 1 1 300px;
+            max-width: 380px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease;
+        }
+
+        
+        .card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        
+        .card.show:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
         }
 
         .card h3 {
             color: #f39c12;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            font-weight: 600;
         }
 
         .card p {
             color: #666;
-            line-height: 1.6;
+            line-height: 1.7;
+            font-size: 1rem;
         }
 
-        
         .footer {
-            background-color: #222;
-            color: #fff;
+            background-color: #111;
+            color: #aaa;
             text-align: center;
-            padding: 25px 20px;
-            font-size: 0.9rem;
+            padding: 30px 20px;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
         }
 
         .footer span {
             color: #f39c12;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         @media (max-width: 768px) {
-            .hamburger { 
-                display: block; 
-            }
+            .hamburger { display: block; }
             
             .nav-links {
-                position: absolute;
-                top: 70px;
+                position: fixed;
+                top: 0;
                 left: -100%;
                 flex-direction: column;
+                justify-content: center;
                 background: rgba(17, 17, 17, 0.98); 
                 width: 100%;
-                height: calc(100vh - 70px);
+                height: 100vh;
                 text-align: center;
                 transition: left 0.4s ease-in-out;
-                padding-top: 50px;
             }
 
             .nav-links li { 
                 margin: 25px 0; 
-            }
+                }
 
-            .nav-links a {
-                color: white;
-                font-size: 1.2rem;
-            }
-
-            .nav-links a:hover {
-                color: #f39c12;
-            }
-            
-            
-            #menu-toggle:checked ~ .nav-links { 
-                left: 0; 
-            }
-
-            .info-section {
-                padding: 50px 5%;
-            }
-            
-            .info-section h2 {
-                font-size: 2rem;
-                margin-bottom: 30px;
-            }
+            .nav-links a { 
+               color: white; 
+               font-size: 1.5rem; 
+                }
+            #menu-toggle:checked ~ .nav-links { left: 0; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="logo">PARKVIEW STUDIO</div>
+    <nav class="navbar" id="navbar">
+        <div class="logo">PARKVIEW <span>STUDIO</span></div>
         
         <input type="checkbox" id="menu-toggle">
         <label for="menu-toggle" class="hamburger">&#9776;</label>
@@ -245,6 +298,7 @@
 
     <section class="info-section">
         <h2>What We Offer</h2>
+        <p class="section-subtitle">Excellence in every frame we capture</p>
         <div class="cards-container">
             <div class="card">
                 <h3>Wedding Packages</h3>
@@ -264,6 +318,50 @@
     <footer class="footer">
         <p>&copy; 2026 <span>Parkview Studio</span>. All rights reserved.</p>
     </footer>
+
+    
+    <script>
+    
+    var nav = document.getElementById('navbar');
+    var allCards = document.getElementsByClassName('card'); 
+
+    function checkScroll() {
+        
+        
+        if (window.scrollY > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+
+        
+        var screenBottom = window.scrollY + window.innerHeight;
+
+        
+        for (var i = 0; i < allCards.length; i++) {
+            
+            
+            var cardTop = allCards[i].offsetTop; 
+            
+            
+            if (cardTop < screenBottom - 100) {
+                
+                
+                setTimeout(function(index) {
+                    return function() {
+                        allCards[index].classList.add('show');
+                    }
+                }(i), i * 150);
+            }
+        }
+    }
+
+    
+    window.addEventListener('scroll', checkScroll);
+    
+    
+    checkScroll();
+</script>
 
 </body>
 </html>
