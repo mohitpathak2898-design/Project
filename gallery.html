@@ -6,7 +6,6 @@
     <title>Parkview Studio | Photo Gallery</title>
     
     <style>
-        
         * { 
             margin: 0; 
             padding: 0; 
@@ -14,12 +13,36 @@
             font-family: Arial, sans-serif; 
         }
 
-        
         body { 
             background-color: #f4f4f4; 
             color: #333; 
         }
+        
+        .nav-header {
+            background-color: #f1f1f1;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+        }
 
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: orange;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
         .page-header {
             background-color: #fff;
             padding: 40px 20px;
@@ -53,7 +76,6 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             cursor: pointer;
         }
-
         
         .gallery-item img {
             width: 100%;
@@ -68,14 +90,6 @@
             transform: scale(1.05);
             filter: grayscale(0%); 
         }
-
-        .footer {
-            background: #222;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-        
         
         #popup-window {
             display: none; 
@@ -89,21 +103,86 @@
             justify-content: center; 
             align-items: center; 
             cursor: pointer;
+            padding: 20px;
         }
 
         #popup-img {
-            max-width: 90%; 
-            max-height: 90%; 
+            max-width: 100%; 
+            max-height: 100%; 
             border: 5px solid white;
+            object-fit: contain;
+        }
+
+        .footer {
+            background-color: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .footer span {
+            color: #f39c12;
+            font-weight: 600;
+        }
+
+        
+        
+        
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 15px;
+            }
+            .gallery-item img {
+                height: 300px; 
+            }
+        }
+
+        
+        @media (max-width: 480px) {
+            .nav-header {
+                padding: 15px 10px;
+            }
+            .logo {
+                font-size: 20px;
+            }
+            .back-link {
+                font-size: 14px;
+            }
+            .page-header {
+                padding: 25px 15px;
+            }
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+            .gallery-container {
+                padding: 15px 5% 40px;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr; 
+            }
+            .gallery-item img {
+                height: 250px; 
+            }
         }
 
     </style>
 </head>
 <body>
 
-    <header class="page-header">
-        <h1>Photo Gallery</h1>
+    <header class="nav-header">
+        <div class="logo">PARKVIEW <span>STUDIO</span></div>
+        <a href="index.html" onclick="window.history.back(); return false;" class="back-link">Back to Home</a>
     </header>
+
+    <div class="page-header">
+        <h1>Photo Gallery</h1>
+    </div>
 
     <section class="gallery-container">
         <div class="gallery-grid">
@@ -127,21 +206,17 @@
     </section>
 
     <footer class="footer">
-        <p>&copy; 2026 Parkview Studio. All rights reserved.</p>
+        <p>&copy; 2026 <span>Parkview Studio</span>. All rights reserved.</p>
     </footer>
 
-  
     <div id="popup-window">
         <img id="popup-img" src="" alt="Popup Image">
     </div>
-
     
     <script>
-       
         var popup = document.getElementById("popup-window");
         var popupImage = document.getElementById("popup-img");
         var allImages = document.querySelectorAll(".gallery-item img");
-
         
         for (var i = 0; i < allImages.length; i++) {
             allImages[i].onclick = function() {
@@ -149,7 +224,6 @@
                 popupImage.src = this.src;    
             }
         }
-
         
         popup.onclick = function() {
             popup.style.display = "none";
