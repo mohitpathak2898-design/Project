@@ -22,7 +22,6 @@
             background-color: #f8f9fa; 
             color: #333; 
         }
-
         
         .navbar {
             display: flex;
@@ -39,7 +38,6 @@
             z-index: 1000;
             transition: padding 0.3s ease, background 0.3s ease;
         }
-
         
         .navbar.scrolled {
             padding: 15px 8%;
@@ -75,7 +73,6 @@
             transition: color 0.3s ease; 
             position: relative;
         }
-
         
         .nav-links a::after {
             content: '';
@@ -97,20 +94,19 @@
         }
 
         #menu-toggle { 
-          display: none; 
-            }
+            display: none; 
+        }
 
         .hamburger { 
             display: none; 
             cursor: pointer; 
             font-size: 28px; 
             color: #333; 
-              }
-        
+        }
         
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-                              1.2.1&auto=format&fit=crop&w=1600&q=80') center/cover;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80') center/cover;
             background-attachment: fixed; 
             display: flex;
             justify-content: center;
@@ -179,7 +175,6 @@
             justify-content: center;
             gap: 40px;
         }
-
         
         .card {
             background: #fff;
@@ -192,13 +187,11 @@
             transform: translateY(30px);
             transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease;
         }
-
         
         .card.show {
             opacity: 1;
             transform: translateY(0);
         }
-
         
         .card.show:hover {
             transform: translateY(-12px);
@@ -231,7 +224,6 @@
             color: #f39c12;
             font-weight: 600;
         }
-
         
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
@@ -244,7 +236,27 @@
         }
         
         @media (max-width: 768px) {
-            .hamburger { display: block; }
+            .hamburger { 
+                display: block; 
+                position: relative; 
+                z-index: 1001; 
+            }
+
+            
+            .hamburger .close-icon {
+                display: none;
+                font-size: 35px;
+                line-height: 28px;
+            }
+
+            
+            #menu-toggle:checked + .hamburger .open-icon {
+                display: none;
+            }
+            #menu-toggle:checked + .hamburger .close-icon {
+                display: block;
+                color: #fff; 
+            }
             
             .nav-links {
                 position: fixed;
@@ -261,12 +273,12 @@
 
             .nav-links li { 
                 margin: 25px 0; 
-                }
+            }
 
             .nav-links a { 
                color: white; 
                font-size: 1.5rem; 
-                }
+            }
             #menu-toggle:checked ~ .nav-links { left: 0; }
         }
     </style>
@@ -277,12 +289,16 @@
         <div class="logo">PARKVIEW <span>STUDIO</span></div>
         
         <input type="checkbox" id="menu-toggle">
-        <label for="menu-toggle" class="hamburger">&#9776;</label>
+        
+        <label for="menu-toggle" class="hamburger">
+            <span class="open-icon">&#9776;</span>
+            <span class="close-icon">&times;</span>
+        </label>
 
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
             <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="packages.html">Packages</a></li>
+            <li><a href="packages.html">Packages</a></li> 
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
@@ -327,25 +343,19 @@
 
     function checkScroll() {
         
-        
         if (window.scrollY > 50) {
             nav.classList.add('scrolled');
         } else {
             nav.classList.remove('scrolled');
         }
 
-        
         var screenBottom = window.scrollY + window.innerHeight;
 
-        
         for (var i = 0; i < allCards.length; i++) {
-            
             
             var cardTop = allCards[i].offsetTop; 
             
-            
             if (cardTop < screenBottom - 100) {
-                
                 
                 setTimeout(function(index) {
                     return function() {
@@ -356,9 +366,7 @@
         }
     }
 
-    
     window.addEventListener('scroll', checkScroll);
-    
     
     checkScroll();
 </script>
